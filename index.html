@@ -601,6 +601,7 @@
             const activeBtn = document.getElementById('nav-' + pageId);
             if(activeBtn) activeBtn.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
                   // Close Modal Function
         function closeModal(event) {
             if(event.target.id === 'info-modal') {
@@ -665,7 +666,7 @@
             });
         }, 100);
 
-        }
+        
 
         // Protection Scripts
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
