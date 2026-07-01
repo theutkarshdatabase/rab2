@@ -525,32 +525,28 @@
                 <p><strong>Phone:</strong><br>6306117920</p>
                 <p><strong>Opening Hours:</strong><br>Daily: 08:00 AM - 07:00 PM</p>
             </div>
-            <div class="contact-form">
-    <h3 style="color: var(--primary-maroon); margin-bottom: 20px;">Request an Appointment</h3>
-    <!-- FormSubmit handles sending the email automatically -->
-    <form action="https://formsubmit.co/Ultrasoundrudra@gmail.com" method="POST">
-        <!-- Hidden settings for email format -->
-        <input type="hidden" name="_subject" value="New Appointment Request from Website!">
-        <input type="hidden" name="_captcha" value="false">
-        
-        <div class="form-group">
-            <input type="text" name="Patient Name" placeholder="Patient Full Name" required>
-        </div>
-        <div class="form-group">
-            <input type="tel" name="Mobile" placeholder="Mobile Number" required>
-        </div>
-        <div class="form-group">
-            <input type="text" name="Test Required" placeholder="Required Test (e.g., CBC, Ultrasound)" required>
-        </div>
-        <div class="form-group">
-            <textarea name="Notes" rows="4" placeholder="Additional Notes or Doctor's Reference..."></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%;">Submit Request</button>
-    </form>
-    <p style="font-size: 0.8rem; color: #718096; margin-top: 10px;">*The first time you test this, you will need to click a confirmation link sent to Ultrasoundrudra@gmail.com to activate the form.</p>
+            <form id="booking-form" onsubmit="submitForm(event)">
+    <input type="hidden" name="_subject" value="New Appointment Request from Website!">
+    <input type="hidden" name="_captcha" value="false">
+    
+    <div class="form-group">
+        <input type="text" name="Patient Name" placeholder="Patient Full Name" required>
+    </div>
+    <div class="form-group">
+        <input type="tel" name="Mobile" placeholder="Mobile Number" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="Test Required" placeholder="Required Test (e.g., CBC, Ultrasound)" required>
+    </div>
+    <div class="form-group">
+        <textarea name="Notes" rows="4" placeholder="Additional Notes or Doctor's Reference..."></textarea>
+    </div>
+    <button type="submit" id="submit-btn" class="btn-primary" style="width: 100%;">Submit Request</button>
+</form>
+<p style="font-size: 0.8rem; color: #718096; margin-top: 10px;">*Your data is securely transmitted directly to the clinic.</p>
 </div>
         </div>
-    </div>
+    
   
 
     <!-- PAGE 3: PRIVACY POLICY -->
@@ -666,7 +662,55 @@
             });
         }, 100);
 
-        
+                // Form Submission Logic (AJAX)
+        function submitForm(event) {
+            // Prevent the page from reloading
+            event.preventDefault(); 
+            
+            const form = event.target;
+            const btn = document.getElementById('submit-btn');
+            
+            // Show loading state
+            const originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+
+            // Collect form data
+            const formData = new FormData(form);
+
+            // Send data in the background using formsubmit.co AJAX endpoint
+            fetch("https://formsubmit.co/ajax/Ultrasoundrudra@gmail.com", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Reset button and clear form
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.style.opacity = "1";
+                form.reset();
+                
+                // Show Success Popup using the existing modal
+                document.getElementById('modal-title').innerText = "Request Submitted!";
+                document.getElementById('modal-body').innerHTML = `
+                    <div style="text-align: center; color: #25D366; font-size: 4rem; margin-bottom: 10px; line-height: 1;">&#10004;</div>
+                    <p style="text-align: center; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 10px;">Your form has been successfully submitted.</p>
+                    <p style="text-align: center; color: var(--text-light); font-size: 0.95rem;">We will contact you shortly on your mobile number to confirm your appointment timing.</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 25px;" onclick="document.getElementById('info-modal').classList.remove('active')">Close</button>
+                `;
+                document.getElementById('info-modal').classList.add('active');
+            })
+            .catch(error => {
+                // Handle errors
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.style.opacity = "1";
+                alert("Network error. Please try again or book via WhatsApp.");
+            });
+        }
+
 
         // Protection Scripts
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
