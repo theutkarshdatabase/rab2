@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyParcham | Sapno ki udaan with Studyparcham</title>
+    
+    <meta name="description" content="Sapno ki udaan with Studyparcham. 100% free, premium educational resources for Class 9-12, JEE, NEET, and Government Job preparation.">
+    <meta name="keywords" content="StudyParcham, Free Education, JEE, NEET, Nexttoppers Parcham, MissionJeet, PW free, Vibrant Academy free">
+    <meta name="author" content="StudyParcham">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:title" content="StudyParcham | Sapno Ki Udaan">
+    <meta property="og:description" content="Shattering paywalls. Access premium study batches, notes, and expert guidance completely free. Only on Studyaparcham with Live chats">
+    <meta property="og:image" content="https://i.ibb.co/rRCw6GWG/IMG-20260326-114528-656.png">
+    <meta property="og:url" content="https://studyparcham.in/">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://www.youtube.com">
+
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://i.ibb.co/rRCw6GWG/IMG-20260326-114528-656.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/rRCw6GWG/IMG-20260326-114528-656.png">
+    <meta name="theme-color" content="#0f2b5b">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBZNKPF0M8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XBZNKPF0M8');
+</script>
+      <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xjmd6744iu");
+      </script>
+    <style>
+        /* --- Premium Classic Theme Variables --- */
+        :root {
+            --primary-blue: #0f2b5b; /* Deep Navy */
+            --accent-gold: #d4af37;  /* Classic Metallic Gold */
+            --bg-light: #f4f7f6;     /* Soft off-white background */
+            --text-main: #475569;    /* Slate Gray for readability */
+            --text-dark: #0f172a;
+            --white: #ffffff;
+            --shadow-soft: 0 10px 30px rgba(15, 43, 91, 0.08);
+            --shadow-hover: 0 20px 40px rgba(212, 175, 55, 0.2);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-light); 
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* --- Global Animations --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
+
+        /* --- Boot Sequence (YouTube Fit-Screen Update) --- */
+        #boot-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000;
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease-out, transform 1s ease-in; overflow: hidden;
+        }
+
+        #start-overlay {
+            position: absolute; z-index: 10; display: flex; flex-direction: column; align-items: center;
+            transition: opacity 0.5s; background: rgba(15, 43, 91, 0.85); padding: 40px; border-radius: 12px;
+            backdrop-filter: blur(10px); border: 2px solid var(--accent-gold); text-align: center;
+        }
+
+        #start-overlay h2 { color: var(--white); font-size: 2.5rem; margin-bottom: 5px; font-family: 'Lora', serif; letter-spacing: 2px; }
+        #start-overlay p { color: var(--accent-gold); font-size: 1.1rem; font-style: italic; margin-bottom: 25px; }
+
+        .yt-fullscreen-container {
+            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            pointer-events: none; /* Disables clicking/pausing the video */
+            opacity: 0; transition: opacity 1s; background: #000;
+        }
+
+        /* Keeps the video fit entirely within the screen maintaining aspect ratio */
+        .yt-fullscreen-container iframe {
+            width: 150vw;
+            height: 80vw; /* 16:9 Aspect Ratio */
+            max-height: 100vh;
+            max-width: 177.77vh; /* 16/9 = 1.777 */
+            border: none;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: rgba(255,255,255,0.95); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);
+        }
+        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-area img { height: 45px; animation: float 6s ease-in-out infinite; } 
+        .logo-text { font-family: 'Lora', serif; font-size: 1.6rem; color: var(--primary-blue); font-weight: 700; }
+        
+        nav { display: flex; gap: 30px; align-items: center; }
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.95rem; transition: var(--transition); position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; background: var(--accent-gold); bottom: -5px; left: 0; transition: var(--transition); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--primary-blue); }
+        
+        /* Buttons */
+        .btn-classic {
+            background: var(--primary-blue); color: var(--white); padding: 12px 28px; border-radius: 6px;
+            text-decoration: none; font-weight: 500; transition: var(--transition); border: 2px solid var(--primary-blue);
+            cursor: pointer; font-size: 0.95rem; font-family: 'Poppins', sans-serif; display: inline-block; text-align: center;
+        }
+        .btn-classic:hover { background: var(--white); color: var(--primary-blue); box-shadow: var(--shadow-soft); transform: translateY(-3px); }
+        .btn-outline { background: transparent; color: var(--primary-blue); }
+        .btn-outline:hover { background: var(--primary-blue); color: var(--white); }
+        .btn-gold { background: linear-gradient(135deg, var(--accent-gold), #b8962e); border: none; color: var(--white); }
+        .btn-gold:hover { background: linear-gradient(135deg, #b8962e, var(--accent-gold)); border: none; color: var(--white); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+
+        /* --- Auth Modal --- */
+        #menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 43, 91, 0.8); backdrop-filter: blur(5px); z-index: 1400; opacity: 0; pointer-events: none; transition: 0.4s; }
+        #menu-overlay.active { opacity: 1; pointer-events: auto; }
+        #auth-modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -40%);
+            background: var(--white); border-radius: 12px; padding: 40px; z-index: 2000; border-top: 5px solid var(--accent-gold);
+            width: 90%; max-width: 450px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        #auth-modal.active { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%); }
+        .auth-header { text-align: center; margin-bottom: 25px; }
+        .auth-header img { height: 50px; margin-bottom: 15px; }
+        .auth-header h3 { color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 5px; }
+        .auth-input { width: 100%; padding: 15px; margin-bottom: 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; color: var(--text-dark); font-family: 'Poppins', sans-serif; outline: none; transition: var(--transition); }
+        .auth-input:focus { border-color: var(--accent-gold); background: var(--white); box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
+        .auth-status { margin-top: 15px; text-align: center; font-size: 0.9rem; font-weight: 500; }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 120px 5%; text-align: center; background: linear-gradient(to bottom, var(--white), var(--bg-light));
+            position: relative; overflow: hidden; border-bottom: 1px solid #e2e8f0;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 850px; margin: 0 auto; }
+        .hero-tag { display: inline-block; background: rgba(212, 175, 55, 0.1); color: #b48a1b; padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; margin-bottom: 25px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(212,175,55,0.3); }
+        .hero h1 { font-size: 4.5rem; line-height: 1.15; margin-bottom: 20px; color: var(--primary-blue); text-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .hero p { font-size: 1.25rem; color: var(--text-main); margin-bottom: 40px; }
+
+        /* --- Section Titles --- */
+        .section-padding { padding: 90px 5%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.8rem; color: var(--primary-blue); margin-bottom: 15px; position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; position: absolute; width: 60px; height: 3px; background: var(--accent-gold); bottom: -10px; left: 50%; transform: translateX(-50%); }
+        .section-header p { color: var(--text-main); max-width: 650px; margin: 20px auto 0; font-size: 1.1rem; }
+
+        /* --- Grids & Cards --- */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        
+        .portal-card {
+            background: var(--white); padding: 40px 30px; border-radius: 12px; text-align: center;
+            box-shadow: var(--shadow-soft); transition: var(--transition); border: 1px solid rgba(0,0,0,0.03);
+            display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; overflow: hidden;
+        }
+        .portal-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 0%; background: linear-gradient(to bottom, rgba(212, 175, 55, 0.05), transparent); transition: var(--transition); z-index: 0; }
+        .portal-card:hover::before { height: 100%; }
+        .portal-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-hover); border-color: rgba(212, 175, 55, 0.3); }
+        .portal-card img { height: 75px; object-fit: contain; margin-bottom: 25px; transition: var(--transition); position: relative; z-index: 1; }
+        .portal-card:hover img { transform: scale(1.1); }
+        .portal-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-blue); position: relative; z-index: 1; }
+        .portal-card p { font-size: 0.95rem; color: var(--text-main); margin-bottom: 25px; flex-grow: 1; position: relative; z-index: 1; }
+        
+        /* Unique Portal Colors */
+        .card-pw { border-top: 4px solid #3b82f6; }
+        .card-mj { border-top: 4px solid var(--accent-gold); }
+        .card-nt { border-top: 4px solid var(--primary-blue); }
+        .card-va { border-top: 4px solid #10b981; }
+
+        /* Secondary Resource Cards */
+        .resource-card { padding: 30px; border-top: none; border-left: 4px solid var(--accent-gold); text-align: left; }
+        .resource-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .resource-card p { margin-bottom: 0; }
+
+        /* Feature Cards */
+        .feature-card { text-align: left; padding: 35px; border-top: 4px solid var(--primary-blue); }
+        .feature-icon { font-size: 2rem; color: var(--accent-gold); margin-bottom: 20px; display: inline-block; padding: 15px; background: rgba(212, 175, 55, 0.1); border-radius: 50%; }
+
+        /* --- App Download Section --- */
+        .app-section {
+            background: linear-gradient(135deg, var(--primary-blue), #1e3a8a); color: var(--white);
+            padding: 80px 5%; text-align: center; border-radius: 20px; max-width: 1200px; margin: 50px auto;
+            box-shadow: 0 20px 50px rgba(15, 43, 91, 0.3); position: relative; overflow: hidden;
+        }
+        .app-section::before { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(212,175,55,0.1); border-radius: 50%; }
+        .app-section::after { content: ''; position: absolute; bottom: -50px; left: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+        .app-content { position: relative; z-index: 1; }
+        .app-content h2 { color: var(--white); font-size: 2.8rem; margin-bottom: 20px; }
+        .app-content p { color: rgba(255,255,255,0.8); font-size: 1.1rem; max-width: 700px; margin: 0 auto 35px; }
+
+        /* --- Footer --- */
+        footer { background: #081630; color: rgba(255,255,255,0.7); padding: 70px 5% 30px; font-size: 0.95rem; border-top: 4px solid var(--accent-gold); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto 40px; }
+        .footer-col h4 { color: var(--white); font-family: 'Poppins', sans-serif; font-size: 1.2rem; margin-bottom: 25px; font-weight: 600; }
+        
+        /* FOOTER LOGO FIX: Added drop-shadow so the logo shows beautifully instead of being inverted to white/invisible */
+        .footer-logo { height: 60px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4)); }
+        
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); display: inline-block; }
+        .footer-links a:hover { color: var(--accent-gold); transform: translateX(5px); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            nav { display: none; }
+            .header-actions { display: flex; gap: 10px; }
+        }
+    </style>
+        
+     </head>
+        
+        
+        
+<body>
+      
+    
+
+    <div id="menu-overlay" onclick="toggleAuth()"></div>
+
+    <div id="auth-modal">
+        <div class="auth-header">
+            <img src="https://i.ibb.co/rRCw6GWG/IMG-20260326-114528-656.png" alt="StudyParcham Logo">
+            <h3>Student Portal</h3>
+            <p style="color: var(--text-main); font-size: 0.9rem;">Access your educational dashboard</p>
+        </div>
+        <input type="email" id="email-in" class="auth-input" placeholder="Email Address">
+        <input type="password" id="pass-in" class="auth-input" placeholder="Password">
+        
+        <button id="fb-login-btn" class="btn-classic btn-gold" style="width: 100%; margin-bottom: 15px;">Sign In</button>
+        <button id="fb-reg-btn" class="btn-classic btn-outline" style="width: 100%; margin-bottom: 15px;">Create Account</button>
+        <button onclick="toggleAuth()" style="width: 100%; background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 0.9rem;">Cancel Request</button>
+        
+        <div id="auth-status" class="auth-status"></div>
+    </div>
+
+    <header>
+        <a href="#" class="logo-area">
+            <img src="https://i.ibb.co/rRCw6GWG/IMG-20260326-114528-656.png" alt="StudyParcham Logo">
+            <span class="logo-text">StudyParcham</span>
+        </a>
+        <nav>
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#academics" class="nav-link">Portals</a>
+            <a href="#resources" class="nav-link">Resources</a>
+            <a href="#why-us" class="nav-link">Why Us</a>
+            <a href="/contact" class="nav-link">Contact us</a>
+            <a href="/privacy-policy" class="nav-link">Privacy Policy</a>
+            <a href="/disclaimer" class="nav-link">Disclaimber</a>
+        
+        </nav>
+        <div class="header-actions">
+            <button id="login-nav-btn" class="btn-classic" onclick="toggleAuth()" style="animation: pulseGlow 2s infinite;">Student Login</button>
+            
+            <div id="user-profile-nav" style="display: none; align-items: center; gap: 12px;">
+                <img id="nav-user-pic" src="" alt="Profile" style="height: 40px; width: 40px; border-radius: 50%; border: 2px solid var(--accent-gold); box-shadow: 0 0 10px rgba(212,175,55,0.4);">
+                <div style="display: flex; flex-direction: column; text-align: left;">
+                  <span id="nav-user-name" style="color: var(--primary-blue); font-weight: 700; font-size: 0.95rem; line-height: 1; max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">Student</span>
+  
+        <span id="logout-btn" style="color: #ef4444; font-size: 0.75rem; font-weight: 600; cursor: pointer; text-transform: uppercase;">Sign Out</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero reveal">
+            <div class="hero-content">
+                <span class="hero-tag">The Free Education Revolution</span>
+                <h1>Sapno ki udaan with Studyparcham</h1>
+                <p>Premium educational resources for Class 9-12 academics, JEE, NEET, and Government Job preparation. Shattering financial barriers so every student can succeed.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                    <a href="#academics" class="btn-classic btn-gold" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 50px;">Explore Portals</a>
+                    <a href="#academics" class="btn-classic btn-outline" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 50px;">Scroll down</a>
+             
+                      <a href="/contact" class="btn-classic btn-outline" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 50px;">Contact Us</a>
+             
+                      <a href="/notification" class="btn-classic btn-outline" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 50px;">Admin - Notifications</a>
+             <a href="/studentchat" class="btn-classic btn-outline" style="padding: 16px 40px; font-size: 1.1rem; border-radius: 50px;">Student Chats</a>
+             
+                </div>
+            </div>
+        </section>
+
+        <section id="academics" class="section-padding" style="background: var(--white);">
+            <div class="section-header reveal">
+                <h2>Elite Academic Portals</h2>
+                <p>Direct access to dedicated, premium-tier academic environments. Fully unlocked and structured for your success.</p>
+            </div>
+
+            <div class="grid-container">
+                <div class="portal-card card-pw reveal">
+                    <img src="https://i.ibb.co/DPnDPVMF/images.png" alt="PW Logo">
+                    <h3>PW</h3>
+                    <p>Advanced physics, chemistry, and high-level science modules for rigorous preparation.</p>
+                    
+                      <a href="pw" target="_blank" class="btn-classic btn-outline" style="width: 100%; position: relative; z-index: 2;">Access Portal</a>
+             
+                        </div>
+
+                <div class="portal-card card-mj reveal delay-1">
+                    <img src="https://i.ibb.co/8np6jb60/mj-final-logo.png" alt="MissionJeet Logo">
+                    <h3>MissionJeet</h3>
+                    <p>100% Free JEE and NEET batches. The ultimate revolution in competitive exam cracking.</p>
+                    
+                      <a href="mj" target="_blank" class="btn-classic btn-gold" style="width: 100%; position: relative; z-index: 2;">Access Missionjeet</a>
+                
+                        </div>
+
+                <div class="portal-card card-nt reveal delay-2">
+                    <img src="https://i.ibb.co/dJbZq97B/2671188-1-logo.jpg" alt="Nexttoppers Parcham Logo">
+                    <h3>Nexttoppers</h3>
+                    <p>Premium class batches and elite study materials curated for top board performance.</p>
+                   
+                        
+                            <a href="nt" target="_blank" class="btn-classic" style="width: 100%; position: relative; z-index: 2;">Access Nexttoppers</a>
+              
+                        </div>
+
+                <div class="portal-card card-va reveal delay-3">
+                    <img src="https://i.ibb.co/23PVMBKs/images.jpg" alt="Vibrant Academy Logo">
+                    <h3>Vibrant Academy</h3>
+                    <p>Kota-level coaching resources, modular testing frameworks, and expert guidance.</p>
+                 
+                               
+                            
+                                <a href="vibrant" target="_blank" class="btn-classic btn-outline" style="width: 100%; position: relative; z-index: 2;">Access Vibrant academy</a>
+            
+                                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="section-padding">
+            <div class="section-header reveal">
+                <h2>Extensive Free Resources</h2>
+                <p>We have mapped out the most powerful educational networks and digital libraries so you don't have to.</p>
+            </div>
+            
+            <div class="grid-container">
+                <div class="portal-card resource-card reveal">
+                    <h3>Rojgar With Ankit</h3>
+                    <p>Specialized frameworks for government job prep and competitive exams.</p>
+                </div>
+                <div class="portal-card resource-card reveal delay-1">
+                    <h3>BookParcham</h3>
+                    <p>A massive archive containing thousands of premium E-Books, unlocked and FREE forever.</p>
+                </div>
+                <div class="portal-card resource-card reveal delay-2">
+                    <h3>Class Plus</h3>
+                    <p>Highly integrated learning methodologies to boost retention and understanding.</p>
+                </div>
+                <div class="portal-card resource-card reveal">
+                    <h3>Padhle Akshay</h3>
+                    <p>Smart, condensed study tactics and high-yield notes for rapid revision.</p>
+                </div>
+                <div class="portal-card resource-card reveal delay-1">
+                    <h3>Master Shahab</h3>
+                    <p>Expert-level guidance, lectures, and mentorship programs delivered to you.</p>
+                </div>
+                <div class="portal-card resource-card reveal delay-2">
+                    <h3>Khan Global Studies</h3>
+                    <p>Comprehensive subject breakdowns mapping complex concepts simply.</p>
+                </div>
+                <div class="portal-card resource-card reveal">
+                    <h3>Selection Way</h3>
+                    <p>Targeted exam cracking strategies focused strictly on output and results.</p>
+                </div>
+            </div>
+        </section>
+        
+        
+
+        <section id="why-us" class="section-padding" style="background: var(--white);">
+            <div class="section-header reveal">
+                <h2>Why Choose StudyParcham?</h2>
+                <p>We engineered this environment for maximum efficiency, total academic immersion, and absolute zero distractions.</p>
+            </div>
+            <div class="grid-container">
+                <div class="portal-card feature-card reveal">
+                    <span class="feature-icon">✦</span>
+                    <h3>100% Free Access</h3>
+                    <p>We bypass standard economic models. No paywalls, no hidden subscription fees. Complete access is permanently unlocked.</p>
+                </div>
+                <div class="portal-card feature-card reveal delay-1">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>Zero Distractions</h3>
+                    <p>We enforce a strictly clean visual environment. Absolutely zero intrusive advertisements or trackers to interrupt your focus.</p>
+                </div>
+                <div class="portal-card feature-card reveal delay-2">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Lightning Fast</h3>
+                    <p>Built on an optimized code kernel, ensuring fast load times whether you are on a high-end PC or a basic mobile device.</p>
+                </div>
+                <div class="portal-card feature-card reveal">
+                    <span class="feature-icon">🤖</span>
+                    <h3>Smart Integration</h3>
+                    <p>Advanced structured pathways to help with complex doubts and generate smart learning routes on the fly.</p>
+                </div>
+            </div>
+        </section>
+       
+        
+        
+
+    </main>
+    
+  
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="https://i.ibb.co/0pBxmrvs/60168-removebg-preview-3.png" alt="StudyParcham Logo" class="footer-logo">
+                <p style="margin-bottom: 20px; color: #94a3b8;">Sapno ki udaan with Studyparcham. Empowering students across the nation with premium, barrier-free education.</p>
+                <a href="mailto:Studyparcham@gmail.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 500; font-size: 1.1rem;">Studyparcham@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Academic Portals</h4>
+                <ul class="footer-links">
+                    <li><a href="https://studyparcham.in/mj">MissionJeet</a></li>
+                    <li><a href="https://studyparcham.in/nt">Nexttoppers</a></li>
+                    <li><a href="https://studyparcham.in/pw">Pw</a></li>
+                    <li><a href="https://studyparcham.in/vibrant">Vibrant Academy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect With Us</h4>
+                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                   <a href="/contact" target="_blank" class="btn-classic btn-outline" style="border-color: rgba(255,255,255,0.2); color: var(--white); padding: 10px 15px;">Contact us</a>
+             <a href="/disclaimer" target="_blank" class="btn-classic btn-outline" style="border-color: rgba(255,255,255,0.2); color: var(--white); padding: 10px 15px;">Disclaimber</a>
+             <a href="/privacy-policy" target="_blank" class="btn-classic btn-outline" style="border-color: rgba(255,255,255,0.2); color: var(--white); padding: 10px 15px;">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 StudyParcham. All Rights Reserved. Designed for Excellence.
+        </div>
+    </footer>
+    
+    
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDNLu0kcWe9UzKOatW3unof6-mIW-HSOqk",
+            authDomain: "studyparcham.firebaseapp.com",
+            projectId: "studyparcham",
+            storageBucket: "studyparcham.firebasestorage.app",
+            messagingSenderId: "582317619464",
+            appId: "1:582317619464:web:cd16333e32b9a8954214bd",
+            measurementId: "G-MLY6JYHWY1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // UI Elements
+        const statusDiv = document.getElementById('auth-status');
+        const loginNavBtn = document.getElementById('login-nav-btn');
+        const userProfileNav = document.getElementById('user-profile-nav');
+        const navUserName = document.getElementById('nav-user-name');
+        const navUserPic = document.getElementById('nav-user-pic');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // --- Auth State Observer (Real-time Profile Updates) ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in. Hide Login button, show Profile!
+                loginNavBtn.style.display = 'none';
+                userProfileNav.style.display = 'flex';
+                
+                // Extract name from email (e.g., utkarsh@gmail.com -> utkarsh)
+                let displayName = user.displayName || user.email.split('@')[0];
+                navUserName.innerText = displayName;
+                
+                // Fetch photo or generate a custom letter avatar based on their name
+                let photoUrl = user.photoURL || `https://ui-avatars.com/api/?name=${displayName}&background=d4af37&color=fff&bold=true`;
+                navUserPic.src = photoUrl;
+                
+                // Automatically close the auth modal if it's open
+                document.getElementById('auth-modal').classList.remove('active');
+                document.getElementById('menu-overlay').classList.remove('active');
+            } else {
+                // User is signed out. Show Login button, hide Profile.
+                loginNavBtn.style.display = 'inline-block';
+                userProfileNav.style.display = 'none';
+            }
+        });
+
+        // --- Logout Logic ---
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                console.log("Student successfully signed out.");
+            }).catch((error) => {
+                console.error("Logout Error:", error);
+            });
+        });
+
+        // --- Registration Logic ---
+        document.getElementById('fb-reg-btn').addEventListener('click', () => {
+            const email = document.getElementById('email-in').value;
+            const pass = document.getElementById('pass-in').value;
+            statusDiv.style.color = "var(--text-main)";
+            statusDiv.innerText = "Creating account...";
+            
+            createUserWithEmailAndPassword(auth, email, pass)
+                .then(() => {
+                    statusDiv.style.color = "#10b981"; // Success Green
+                    statusDiv.innerText = "Account created successfully!";
+                    document.getElementById('email-in').value = '';
+                    document.getElementById('pass-in').value = '';
+                })
+                .catch((error) => {
+                    statusDiv.style.color = "#ef4444"; // Error Red
+                    statusDiv.innerText = error.message;
+                });
+        });
+
+        // --- Login Logic ---
+        document.getElementById('fb-login-btn').addEventListener('click', () => {
+            const email = document.getElementById('email-in').value;
+            const pass = document.getElementById('pass-in').value;
+            statusDiv.style.color = "var(--text-main)";
+            statusDiv.innerText = "Authenticating...";
+
+            signInWithEmailAndPassword(auth, email, pass)
+                .then(() => {
+                    statusDiv.style.color = "#10b981";
+                    statusDiv.innerText = "Welcome back, Student!";
+                    document.getElementById('email-in').value = '';
+                    document.getElementById('pass-in').value = '';
+                })
+                .catch((error) => {
+                    statusDiv.style.color = "#ef4444";
+                    statusDiv.innerText = "Invalid credentials. Please try again.";
+                });
+        });
+    </script>
+      
+
+                <script>
+        // --- Standard UI Scripts ---
+        window.toggleAuth = function() {
+            document.getElementById('auth-modal').classList.toggle('active');
+            document.getElementById('menu-overlay').classList.toggle('active');
+        }
+
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            });
+        }, revealOptions);
+        revealElements.forEach(el => revealOnScroll.observe(el));
+    </script>
+                                                         
+
+     
+
+
+
+  
+                                                         
+</body>
+</html>
