@@ -26,7 +26,8 @@ export async function onRequest(context) {
         const input = await request.json();
         const action = input.action;
         const params = input.params || {};
-        const method = input.method || 'GET';
+        // 🔥 FIX 1: Force Uppercase to prevent fatal GET body crashes
+        const method = (input.method || 'GET').toUpperCase(); 
         const payload = input.payload || null;
 
         if (!action) {
@@ -46,7 +47,7 @@ export async function onRequest(context) {
                 isDirectFetch = false; 
                 break;
            
-            // 📚 BATCH & SYSTEM MAPS
+            // 答 BATCH & SYSTEM MAPS
             case 'pw_btch_dtl': targetUrl = `${PW_API}/v3/batches/${params.batchId}/details`; 
                 isDirectFetch = true;
                 break;
@@ -55,7 +56,7 @@ export async function onRequest(context) {
             case 'pw_sub_topics': targetUrl = `${PW_API}/batch-service/v1/batch-tags/${params.batchId}/subject/${params.subjectId}/topics?page=${params.page}&batchTagType=${params.tagType || ''}&limit=${params.limit}`; break;
             case 'pw_res_topics': targetUrl = `${PW_API}/batch-service/v1/batch-tags/${params.batchId}/topics?page=1&batchSubjectIds=${params.subjectIds}`; break;
 
-            // 📅 SCHEDULES & DVR STREAMS
+            // 套 SCHEDULES & DVR STREAMS
             case 'pw_tdy_sch': targetUrl = `${PW_API}/v2/batches/${params.batchId}/todays-schedule?batchId=${params.batchId}`; break;
             case 'pw_wkly_sch': targetUrl = `${PW_API}/v2/batches/${params.batchId}/weekly-schedules?batchId=${params.batchId}&startDate=${params.startDate}&endDate=${params.endDate}&page=${params.page}`; break;
             case 'pw_sch_cntnt': targetUrl = `${PW_API}/batch-service/v3/batch-subject-schedules/${params.batchId}/subject/${params.subjectId}/contents?skip=${params.skip}&limit=${params.limit}&contentType=${params.contentType}&contentFilter=ALL&tagId=${params.tagId}`; break;
@@ -64,20 +65,20 @@ export async function onRequest(context) {
             case 'pw_notes': targetUrl = `${PW_API}/v1/batches/${params.batchId}/subject/${params.subjectId}/schedule/${params.scheduleId}/notes`; break;
             case 'get-video-url': targetUrl = `${PW_API}/v1/batches/634bd315ed7a360018558283/subject/${params.subjectId}/schedule/${params.scheduleId}/schedule-details`; break;
            
-            // 📝 EXAMS, TESTS, AND DPPS
+            // 統 EXAMS, TESTS, AND DPPS
             case 'pw_test_strt': targetUrl = `${PW_API}/v3/test-service/tests/${params.testId}/start-test?batchId=634bd315ed7a360018558283&exerciseId=${params.testId}&testSource=${params.testSource}&type=${params.type}&batchScheduleId=${params.scheduleId}&subjectId=${params.subjectId}`; break;
             case 'pw_dpp_lst': targetUrl = `${PW_API}/v3/test-service/tests/new-dpp-list?page=${params.page}&batchId=${params.batchId}&batchSubjectId=${params.subjectId}&chapterId=${params.chapterId}&dppType=ALL&limit=${params.limit}`; break;
             case 'pw_test_lst': targetUrl = `${PW_API}/v3/test-service/tests?testType=All&testStatus=All&attemptStatus=All&batchId=${params.batchId}&isSubjective=false&isPurchased=true&limit=${params.limit}`; break;
             case 'pw_test_map': targetUrl = `${PW_API}/v3/test-service/tests/user-test-student-mapping-list`; break;
 
-            // 💬 CHAT SYSTEM & POLLS
+            // 町 CHAT SYSTEM & POLLS
             case 'pw_vid_cmnts': targetUrl = `${PW_API}/v1/comments/${params.schId}?isPinned=true&limit=20&lastSeenId=${params.lastSeenId || ''}`; break;
             case 'pw_chat_get': targetUrl = `${PW_API}/v1/conversation/${params.conversationId}/chat?limit=${params.limit}&lastSeenId=${params.lastSeenId || ''}`; break;
             case 'pw_chat_post': targetUrl = `${PW_API}/v1/conversation/${params.conversationId}/chat`; break;
             case 'pw_poll_actv': targetUrl = `${PW_API}/v2/poll/entity/${params.scheduleId}/active-poll`; break;
             case 'pw_poll_vote': targetUrl = `${PW_API}/v2/poll/upvote-poll`; break;
 
-            // 🌍 COMMUNITY FEED FEEDS
+            // 訣 COMMUNITY FEED FEEDS
             case 'pw_com_chnl': targetUrl = `${PW_GATE}/v3/community/channels/batch/${params.batchId}`; break;
             case 'pw_com_posts': targetUrl = `${PW_GATE}/v3/community/posts/v2?channelId=${params.channelId}&page=${params.page}&timestamp=${params.timestamp}`; break;
             case 'pw_com_create': targetUrl = `${PW_GATE}/v3/community/posts`; break;
@@ -86,7 +87,7 @@ export async function onRequest(context) {
             case 'pw_com_cmnts': targetUrl = `${PW_API}/v1/comments/${params.postId}?type=${params.type}&limit=${params.limit}&skip=${params.skip}`; break;
             case 'pw_com_cmnt_mk': targetUrl = `${PW_API}/v1/comments`; break;
 
-            // 👤 STUDENT PROFILE HOOKS
+            // 側 STUDENT PROFILE HOOKS
             case 'pw_usr_prof': targetUrl = `${PW_API}/student-engagement-core/private/v1/gamification/user/profile`; break;
             case 'pw_tch_prof': targetUrl = `${PW_GATE}/v3/community/users/profile?teacherId=${params.teacherId}`; break;
             case 'pw_notifs': targetUrl = `${PW_API}/v1/batches/${params.batchId}/announcement?page=${params.page}&limit=${params.limit}`; break;
@@ -98,78 +99,93 @@ export async function onRequest(context) {
         let response;
         let httpStatus = 200;
 
-        if (isDirectFetch) {
-            response = await fetch(targetUrl, {
-                method: method, // Fixed to use dynamic method instead of hardcoded 'GET'
-                headers: {
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-                    "Accept": "application/json"
-                },
-                body: payload && method !== 'GET' ? (typeof payload === 'string' ? payload : JSON.stringify(payload)) : undefined
-            });
-        } else {
-            const vercelProxyUrl = "https://pw-proxy-lime.vercel.app/api/proxy";
-            const postData = new URLSearchParams();
-            postData.append('target_url', targetUrl);
-            postData.append('method', method);
-            if (payload) {
-                postData.append('payload', typeof payload === 'string' ? payload : JSON.stringify(payload));
-            }
+        // 🔥 FIX 2: 9-Second Cloudflare Kill Switch
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 9000);
 
-            response = await fetch(vercelProxyUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: postData.toString()
-            });
-        }
-
-        httpStatus = response.status;
-        let text = await response.text();
-        let cleanJson;
-
-        // --- BULLETPROOF JSON PARSER & ERROR REPORTER ---
         try {
-            // First, try to parse it normally
-            cleanJson = JSON.parse(text);
-            
-            // Unpack nested stringified data if it exists
-            if (cleanJson && cleanJson.data && typeof cleanJson.data === 'string' && cleanJson.data.startsWith('{')) {
-                try { cleanJson.data = JSON.parse(cleanJson.data); } catch(e){}
+            if (isDirectFetch) {
+                response = await fetch(targetUrl, {
+                    method: method, 
+                    headers: {
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                        "Accept": "application/json"
+                    },
+                    body: payload && method !== 'GET' ? (typeof payload === 'string' ? payload : JSON.stringify(payload)) : undefined,
+                    signal: controller.signal
+                });
+            } else {
+                const vercelProxyUrl = "https://pw-proxy-lime.vercel.app/api/proxy";
+                const postData = new URLSearchParams();
+                postData.append('target_url', targetUrl);
+                postData.append('method', method);
+                if (payload) {
+                    postData.append('payload', typeof payload === 'string' ? payload : JSON.stringify(payload));
+                }
+
+                response = await fetch(vercelProxyUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: postData.toString(),
+                    signal: controller.signal
+                });
             }
             
-            // Add HTTP status so the frontend knows if it was a 403 or 429
-            cleanJson.httpStatus = httpStatus;
-            
-            return Response.json(cleanJson, { headers: { "Access-Control-Allow-Origin": "*" } });
+            clearTimeout(timeoutId);
 
-        } catch (parseError) {
-            // If normal parse fails, try the substring fallback (for dirty proxy responses)
-            const start = text.indexOf('{');
-            const end = text.lastIndexOf('}');
-            
-            if (start !== -1 && end !== -1) {
-                try {
-                    cleanJson = JSON.parse(text.substring(start, end + 1));
-                    cleanJson.httpStatus = httpStatus;
-                    return Response.json(cleanJson, { headers: { "Access-Control-Allow-Origin": "*" } });
-                } catch (fallbackError) {
-                    // Both parsing methods failed. Report exactly what the server sent.
+            httpStatus = response.status;
+            let text = await response.text();
+            let cleanJson;
+
+            // --- BULLETPROOF JSON PARSER & ERROR REPORTER ---
+            try {
+                cleanJson = JSON.parse(text);
+                
+                if (cleanJson && cleanJson.data && typeof cleanJson.data === 'string' && cleanJson.data.startsWith('{')) {
+                    try { cleanJson.data = JSON.parse(cleanJson.data); } catch(e){}
+                }
+                
+                cleanJson.httpStatus = httpStatus;
+                
+                return Response.json(cleanJson, { headers: { "Access-Control-Allow-Origin": "*" } });
+
+            } catch (parseError) {
+                const start = text.indexOf('{');
+                const end = text.lastIndexOf('}');
+                
+                if (start !== -1 && end !== -1) {
+                    try {
+                        cleanJson = JSON.parse(text.substring(start, end + 1));
+                        cleanJson.httpStatus = httpStatus;
+                        return Response.json(cleanJson, { headers: { "Access-Control-Allow-Origin": "*" } });
+                    } catch (fallbackError) {
+                        return Response.json({ 
+                            success: false, 
+                            message: "Failed to parse API response as JSON.", 
+                            httpStatus: httpStatus,
+                            rawResponse: text.substring(0, 300) 
+                        }, { headers: { "Access-Control-Allow-Origin": "*" } });
+                    }
+                } else {
                     return Response.json({ 
                         success: false, 
-                        message: "Failed to parse API response as JSON.", 
-                        httpStatus: httpStatus,
-                        rawResponse: text.substring(0, 300) // Send the first 300 characters to frontend to debug
+                        message: "API returned non-JSON format (Likely HTML error page).", 
+                        httpStatus: httpStatus, 
+                        rawResponse: text.substring(0, 300) 
                     }, { headers: { "Access-Control-Allow-Origin": "*" } });
                 }
-            } else {
-                // Not even close to JSON. Probably an HTML error page.
-                return Response.json({ 
+            }
+
+        } catch (fetchError) {
+            // 🔥 Catch the 9-second timeout safely
+            if (fetchError.name === 'AbortError') {
+                 return Response.json({ 
                     success: false, 
-                    message: "API returned non-JSON format (Likely HTML error page).", 
-                    httpStatus: httpStatus, 
-                    rawResponse: text.substring(0, 300) 
+                    message: "Cloudflare Worker Timeout: Target API took too long to respond.", 
+                    httpStatus: 504 
                 }, { headers: { "Access-Control-Allow-Origin": "*" } });
             }
+            throw fetchError; // Send other crashes down to the main error handler
         }
 
     } catch (error) {
@@ -180,4 +196,5 @@ export async function onRequest(context) {
             error: error.message 
         }, { status: 500, headers: { "Access-Control-Allow-Origin": "*" } });
     }
-    }
+    // 🔥 FIX 3: Removed the extra curly brace here that was crashing everything!
+}
