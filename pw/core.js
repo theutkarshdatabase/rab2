@@ -3,7 +3,7 @@ window.ParchamCore = async function(actionKey, params = {}, method = 'GET', payl
     
     // Connects seamlessly to your Cloudflare Edge Function (/api/vault).
     // The Network Tab will only ever show "vault". ALL URLs are hidden.
-    const VAULT_URL = "/api/vault";
+    const VAULT_URL = "/api/data";
     
     try {
         const response = await fetch(VAULT_URL, {
