@@ -115,7 +115,7 @@ export async function onRequest(context) {
                     signal: controller.signal
                 });
             } else {
-                const vercelProxyUrl = "https://pw-proxy-silk.vercel.app/api/proxy";
+                const vercelProxyUrl = "https://pw-proxy-orcin.vercel.app/api/proxy";
                 const postData = new URLSearchParams();
                 postData.append('target_url', targetUrl);
                 postData.append('method', method);
